@@ -1,0 +1,257 @@
+{
+  "name": "CV Ingestion",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -224,
+        16
+      ],
+      "id": "8d7d66bd-47fd-4034-9d5f-f11dba5fdb08",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "fileSelector": "C:/Users/nafay/.n8n-files/Profile.pdf",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1.1,
+      "position": [
+        -32,
+        16
+      ],
+      "id": "abf17b96-3825-4e71-93d1-1b6cc16cf67a",
+      "name": "Read/Write Files from Disk",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "operation": "pdf",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1.1,
+      "position": [
+        144,
+        16
+      ],
+      "id": "5ec068fb-1ff8-4c0d-8368-6e51fed26afd",
+      "name": "Extract from File",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "jsonMode": "expressionData",
+        "jsonData": "={{ $json.text }}",
+        "textSplittingMode": "custom",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1.1,
+      "position": [
+        544,
+        128
+      ],
+      "id": "bf16ca96-9bf2-49e0-a6cc-e548e74e284f",
+      "name": "Default Data Loader1",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "pineconeIndex": {
+          "__rl": true,
+          "value": "my-cv-index",
+          "mode": "list",
+          "cachedResultName": "my-cv-index"
+        },
+        "embeddingBatchSize": 1,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "typeVersion": 1.3,
+      "position": [
+        352,
+        16
+      ],
+      "id": "15872b5e-6fe7-4801-b84c-e8b882553f93",
+      "name": "Pinecone Vector Store",
+      "notesInFlow": false,
+      "credentials": {
+        "pineconeApi": {
+          "id": "1ZgL6HJXiBtVsa0J",
+          "name": "PineconeApi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chunkSize": 500,
+        "chunkOverlap": 100,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+      "typeVersion": 1,
+      "position": [
+        544,
+        320
+      ],
+      "id": "dce2aba7-a451-4426-ae47-3041ae448051",
+      "name": "Recursive Character Text Splitter",
+      "alwaysOutputData": true,
+      "retryOnFail": true
+    },
+    {
+      "parameters": {
+        "modelName": "embed-english-v3.0"
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsCohere",
+      "typeVersion": 1,
+      "position": [
+        352,
+        304
+      ],
+      "id": "3996bc57-5e31-48c8-a6d2-087c48d2d816",
+      "name": "Embeddings Cohere",
+      "credentials": {
+        "cohereApi": {
+          "id": "bjrkrBLlpoT44gyD",
+          "name": "CohereApi account"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "Extract from File": [
+      {
+        "json": {
+          "numpages": 1,
+          "numrender": 1,
+          "info": {
+            "PDFFormatVersion": "1.4",
+            "Language": "en",
+            "EncryptFilterName": null,
+            "IsLinearized": false,
+            "IsAcroFormPresent": false,
+            "IsXFAPresent": false,
+            "IsCollectionPresent": false,
+            "IsSignaturesPresent": false,
+            "Title": "Resume",
+            "Author": "LinkedIn",
+            "Subject": "Resume generated from profile",
+            "Producer": "Apache FOP Version 2.3",
+            "CreationDate": "D:20260307101004Z"
+          },
+          "metadata": {
+            "dc:description": "Resume generated from profile",
+            "dc:creator": [],
+            "dc:format": "application/pdf",
+            "dc:title": "Resume",
+            "dc:language": "en",
+            "dc:date": "2026-03-07T10:10:04Z",
+            "pdf:producer": "Apache FOP Version 2.3",
+            "pdf:pdfversion": "1.4",
+            "pdfuaid:part": "1",
+            "xmp:metadatadate": "2026-03-07T10:10:04Z",
+            "xmp:createdate": "2026-03-07T10:10:04Z"
+          },
+          "text": "Contact\nnafayy04@gmail.com\nwww.linkedin.com/in/nafay-mohiy-\nud-din-959136320 (LinkedIn)\nTop Skills\nPython (Programming Language)\nArtificial Intelligence (AI)\nLarge Language Models (LLM)\nCertifications\nAI Python for Beginners\nNafay Mohiy ud Din\nCS Student | Aspiring AI Engineer | Building with Python & Streamlit |\nCertified by DeepLearning.AI\nRawalpindi, Punjab, Pakistan\nExperience\nBahria University\nComputer Science Student\nOctober 2023 - Present (2 years 6 months)\nIslamabad, Pakistan\nPursuing a Bachelor's degree with a specialized focus on Artificial Intelligence\nand Software Development.\nKey Coursework:\nData Structures & Algorithms\nObject-Oriented Programming (OOP)\nArtificial Intelligence & Machine Learning\nEducation\nBahria University\nBachelor of Science - BS, Computer Science · (October 2023 - July 2027)\nPage 1 of 1",
+          "version": "5.3.31"
+        },
+        "binary": {},
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Read/Write Files from Disk": {
+      "main": [
+        [
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File": {
+      "main": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader1": {
+      "ai_document": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Read/Write Files from Disk",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Recursive Character Text Splitter": {
+      "ai_textSplitter": [
+        [
+          {
+            "node": "Default Data Loader1",
+            "type": "ai_textSplitter",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pinecone Vector Store": {
+      "main": [
+        []
+      ]
+    },
+    "Embeddings Cohere": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "067a604e-8a9a-410d-8fea-0eabb843ee64",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "b356c85420e084b3f442b20df5845219177425bc61973820bc3634efa0437052"
+  },
+  "id": "dyfjy9tEIvjbq4BW",
+  "tags": []
+}
