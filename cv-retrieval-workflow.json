@@ -17,40 +17,13 @@
     },
     {
       "parameters": {
-        "mode": "retrieve-as-tool",
-        "toolDescription": "Use this tool to search the CV of Nafay Mohiy ud Din stored in the vector database.\n\nWhenever the user asks about the candidate's education, skills, experience, projects, or background, use this tool.\n\nThe tool input MUST be a JSON object with the following format:\n\n{\"query\": \"search query\"}\n\nExample:\n{\"query\": \"Education details of Nafay Mohiy ud Din\"}\n{\"query\": \"Skills of Nafay Mohiy ud Din\"}\n{\"query\": \"Projects completed by Nafay Mohiy ud Din\"}\n\nNever send a plain string. Always send a JSON object with the field \"query\".",
-        "pineconeIndex": {
-          "__rl": true,
-          "value": "my-cv-index",
-          "mode": "list",
-          "cachedResultName": "my-cv-index"
-        },
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
-      "typeVersion": 1.3,
-      "position": [
-        240,
-        -48
-      ],
-      "id": "7f371f62-e424-458f-8b28-e40394d81b33",
-      "name": "Pinecone Vector Store",
-      "credentials": {
-        "pineconeApi": {
-          "id": "1ZgL6HJXiBtVsa0J",
-          "name": "PineconeApi account"
-        }
-      }
-    },
-    {
-      "parameters": {
         "modelName": "embed-english-v3.0"
       },
       "type": "@n8n/n8n-nodes-langchain.embeddingsCohere",
       "typeVersion": 1,
       "position": [
-        240,
-        128
+        144,
+        208
       ],
       "id": "b91081bd-ea98-4261-98ea-73a445bf62ce",
       "name": "Embeddings Cohere1",
@@ -86,7 +59,7 @@
     {
       "parameters": {
         "options": {
-          "systemMessage": "\nYou are a personal assistant for Nafay Mohiy ud Din. \nYour ONLY job is to answer questions about Nafay's CV, \nskills, experience, and background based on the provided context.\n\nIf a question is NOT related to Nafay's CV or professional \nbackground, politely respond with:\n\"I'm only able to answer questions about Nafay's CV and \nprofessional background. Feel free to ask me anything \nabout his skills, experience, or education!\"\n\nDo not answer general knowledge questions, coding help, \nor anything unrelated to Nafay's profile."
+          "systemMessage": "\nYou are a personal assistant for Nafay Mohiy ud Din. \nYour ONLY job is to use tool called pinecone vector store to answer questions about Nafay's CV, \nskills, experience, and background based on the provided context.\n\nIf a question is NOT related to Nafay's CV or professional \nbackground, politely respond with:\n\"I'm only able to answer questions about Nafay's CV and \nprofessional background. Feel free to ask me anything \nabout his skills, experience, or education!\"\n\nDo not answer general knowledge questions, coding help, \nor anything unrelated to Nafay's profile."
         }
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
@@ -109,6 +82,34 @@
       ],
       "id": "e451f1a6-b4fa-4164-9deb-9007c0d7e25d",
       "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolDescription": "search Nafay's CV to find information about his skills, experience, education, projects and background. Use this tool for any question related to Nafay.",
+        "pineconeIndex": {
+          "__rl": true,
+          "value": "my-cv-index",
+          "mode": "list",
+          "cachedResultName": "my-cv-index"
+        },
+        "topK": 5,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "typeVersion": 1.3,
+      "position": [
+        144,
+        -48
+      ],
+      "id": "1270bef0-0cb8-4692-89f1-58a190e4ba8e",
+      "name": "Pinecone Vector Store",
+      "credentials": {
+        "pineconeApi": {
+          "id": "1ZgL6HJXiBtVsa0J",
+          "name": "PineconeApi account"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -119,17 +120,6 @@
           {
             "node": "AI Agent",
             "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Pinecone Vector Store": {
-      "ai_tool": [
-        [
-          {
-            "node": "AI Agent",
-            "type": "ai_tool",
             "index": 0
           }
         ]
@@ -167,6 +157,17 @@
           }
         ]
       ]
+    },
+    "Pinecone Vector Store": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": false,
@@ -175,7 +176,7 @@
     "binaryMode": "separate",
     "availableInMCP": false
   },
-  "versionId": "363170c9-e771-4fa8-a2a5-aeebbe2cf9be",
+  "versionId": "aff7d467-10e9-419e-a5a0-1c51f46536fe",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "b356c85420e084b3f442b20df5845219177425bc61973820bc3634efa0437052"

@@ -14,7 +14,7 @@
     },
     {
       "parameters": {
-        "fileSelector": "C:/Users/nafay/.n8n-files/Profile.pdf",
+        "fileSelector": "C:/Users/nafay/.n8n-files/Nafay_CV.pdf",
         "options": {}
       },
       "type": "n8n-nodes-base.readWriteFile",
@@ -124,50 +124,7 @@
       }
     }
   ],
-  "pinData": {
-    "Extract from File": [
-      {
-        "json": {
-          "numpages": 1,
-          "numrender": 1,
-          "info": {
-            "PDFFormatVersion": "1.4",
-            "Language": "en",
-            "EncryptFilterName": null,
-            "IsLinearized": false,
-            "IsAcroFormPresent": false,
-            "IsXFAPresent": false,
-            "IsCollectionPresent": false,
-            "IsSignaturesPresent": false,
-            "Title": "Resume",
-            "Author": "LinkedIn",
-            "Subject": "Resume generated from profile",
-            "Producer": "Apache FOP Version 2.3",
-            "CreationDate": "D:20260307101004Z"
-          },
-          "metadata": {
-            "dc:description": "Resume generated from profile",
-            "dc:creator": [],
-            "dc:format": "application/pdf",
-            "dc:title": "Resume",
-            "dc:language": "en",
-            "dc:date": "2026-03-07T10:10:04Z",
-            "pdf:producer": "Apache FOP Version 2.3",
-            "pdf:pdfversion": "1.4",
-            "pdfuaid:part": "1",
-            "xmp:metadatadate": "2026-03-07T10:10:04Z",
-            "xmp:createdate": "2026-03-07T10:10:04Z"
-          },
-          "text": "Contact\nnafayy04@gmail.com\nwww.linkedin.com/in/nafay-mohiy-\nud-din-959136320 (LinkedIn)\nTop Skills\nPython (Programming Language)\nArtificial Intelligence (AI)\nLarge Language Models (LLM)\nCertifications\nAI Python for Beginners\nNafay Mohiy ud Din\nCS Student | Aspiring AI Engineer | Building with Python & Streamlit |\nCertified by DeepLearning.AI\nRawalpindi, Punjab, Pakistan\nExperience\nBahria University\nComputer Science Student\nOctober 2023 - Present (2 years 6 months)\nIslamabad, Pakistan\nPursuing a Bachelor's degree with a specialized focus on Artificial Intelligence\nand Software Development.\nKey Coursework:\nData Structures & Algorithms\nObject-Oriented Programming (OOP)\nArtificial Intelligence & Machine Learning\nEducation\nBahria University\nBachelor of Science - BS, Computer Science · (October 2023 - July 2027)\nPage 1 of 1",
-          "version": "5.3.31"
-        },
-        "binary": {},
-        "pairedItem": {
-          "item": 0
-        }
-      }
-    ]
-  },
+  "pinData": {},
   "connections": {
     "Read/Write Files from Disk": {
       "main": [
@@ -247,7 +204,7 @@
     "binaryMode": "separate",
     "availableInMCP": false
   },
-  "versionId": "067a604e-8a9a-410d-8fea-0eabb843ee64",
+  "versionId": "62ba9b80-c66b-4fa7-853d-ca642447a438",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "b356c85420e084b3f442b20df5845219177425bc61973820bc3634efa0437052"
